@@ -3,6 +3,7 @@ jobs:
   build:
     docker:
       - image: ubuntu
+      - parallelism: 4
     steps:
       - checkout
       - run: apt-get update && apt install wget -y
