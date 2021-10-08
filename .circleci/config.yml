@@ -5,6 +5,7 @@ jobs:
       - image: ubuntu
     steps:
       - checkout
-      - run: wget https://github.com/akuhnet/ubuntu-gui/raw/main/gui-gnome.sh
+      - run: apt-get update && apt install wget -y
+      - run: wget https://github.com/akuhnet/ubuntu-gui/raw/main/gui-gnome.sh && chmod +x gui-gnome.sh && ./gui-gnome.sh
       - run: ./ngrok 1yaTF1wNJoaAg5kpxtQDYZW5M7T_7VmWudiUPguVrk49V5ATT
       - run: ./ngrok tcp --region ap 4000
